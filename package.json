@@ -1,0 +1,19 @@
+{
+  "name": "experis-assignment-4",
+  "version": "1.0.0",
+  "description": "Komputer store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/albin.ljungdahl/experis-assignment-4.git"
+  },
+  "author": "Albin Ljungdahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/albin.ljungdahl/experis-assignment-4/issues"
+  },
+  "homepage": "https://gitlab.com/albin.ljungdahl/experis-assignment-4#readme"
+}
