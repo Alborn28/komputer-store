@@ -86,7 +86,7 @@ const updateLoanBalance = () => {
 }
 
 const updateBalance = () => {
-    balanceElement.innerText = balance + ' Kr.';
+    balanceElement.innerText = `${balance} Kr.`;
 }
 
 
@@ -118,7 +118,7 @@ const handleBankButtonClick = () => {
 }
 
 const updatePay = () => {
-    payElement.innerText = pay + ' Kr.';
+    payElement.innerText = `${pay} Kr.`;
 }
 
 const handleRepayLoanButtonClick = () => {
@@ -162,7 +162,7 @@ const updateLaptopDescription = (selectedLaptop) => {
 }
 
 const updateLaptopPrice = (selectedLaptop) => {
-    laptopPriceElement.innerText = selectedLaptop.price + ' Kr.';
+    laptopPriceElement.innerText = `${selectedLaptop.price} Kr.`;
 }
 
 const updateLaptopModel = (selectedLaptop) => {
@@ -176,13 +176,13 @@ const updateLaptopImage = (selectedLaptop) => {
 const handleBuyLaptopClick = () => {
     const selectedLaptop = laptops[laptopSelectionElement.selectedIndex];
     if(balance < selectedLaptop.price) {
-        alert("You can't afford the " + selectedLaptop.title + "!");
+        alert(`You can't afford the ${selectedLaptop.title}!`);
         return;
     }
 
     balance -= selectedLaptop.price;
     updateBalance();
-    alert("You are now the proud owner of a " + selectedLaptop.title + "!");
+    alert(`You are now the proud owner of a ${selectedLaptop.title}!`);
     loanTaken = false;
 }
 
