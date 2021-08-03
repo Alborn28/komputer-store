@@ -8,24 +8,48 @@
     </head>
 
     <body>
-        <div class="bankDiv">
+        <div class="componentDiv">
             <h4>Joe Banker</h4>
-            <span>Balance: </span>
-            <span id="balance">0 Kr.</span>
-            <br>
-            <span id="outstandingLoan" hidden>Outstanding loan: </span>
-            <span id="outstandingLoanAmount"></span>
-            <br>
-            <button id="loanButton">Get a loan</button>
+            <div>
+                <span>Balance: </span>
+                <span id="balance">0 Kr.</span>
+            </div>
+            
+            <div>
+                <span id="outstandingLoan" hidden>Outstanding loan: </span>
+                <span id="outstandingLoanAmount"></span>
+            </div>
+            <div>
+                <button id="loanButton">Get a loan</button>
+            </div>
         </div>
 
-        <div class="workDiv">
+        <div class="componentDiv">
             <h4>Work</h4>
-            <span>Pay: </span>
-            <span id=pay></span>
-            <br>
-            <button id="bankButton">Bank</button>
-            <button id="workButton">Work</button>
+            <div>
+                <span>Pay: </span>
+                <span id=pay>0 Kr.</span>
+            </div>
+            
+            <div>
+                <button id="bankButton">Bank</button>
+                <button id="workButton">Work</button>
+            </div>
+
+            <div>
+                <button id="repayLoanButton" hidden>Repay loan</button>
+            </div>
+        </div>
+
+        <div id="laptopDiv" class="componentDiv">
+            <h4>Laptops</h4>
+            <select id="laptopSelection">
+
+            </select>
+            <h5>Features</h5>
+            <ul id="featuresList">
+
+            </ul>
         </div>
 
         <script src="resources/js/index.js"></script>
