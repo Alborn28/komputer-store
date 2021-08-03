@@ -10,6 +10,10 @@ const payElement = document.getElementById("pay");
 
 const laptopSelectionElement = document.getElementById("laptopSelection");
 const featuresListElement = document.getElementById("featuresList");
+const laptopDescriptionElement = document.getElementById("laptopDescription");
+const laptopPriceElement = document.getElementById("laptopPrice");
+const laptopModelElement = document.getElementById("laptopModel");
+const buyLaptopButtonElement = document.getElementById("buyLaptop");
 
 let balance = 0;
 let outstandingLoan = 0;
@@ -25,7 +29,10 @@ fetch("https://noroff-komputer-store-api.herokuapp.com/computers")
 
 const addLaptopsToList = (laptops) => {
     laptops.forEach(x => addLaptopToList(x));
-    addLaptopSpecs(laptops[0]);
+    updateLaptopFeatures(laptops[0]);
+    updateLaptopDescription(laptops[0]);
+    updateLaptopPrice(laptops[0]);
+    updateLaptopModel(laptops[0]);
 }
 
 const addLaptopToList = (laptop) => {
@@ -122,10 +129,13 @@ const handleRepayLoanButtonClick = () => {
 
 const handleLaptopSelectionChange = (e) => {
     const selectedLaptop = laptops[e.target.selectedIndex];
-    addLaptopSpecs(selectedLaptop);
+    updateLaptopFeatures(selectedLaptop);
+    updateLaptopDescription(selectedLaptop);
+    updateLaptopPrice(selectedLaptop);
+    updateLaptopModel(selectedLaptop);
 }
 
-const addLaptopSpecs = (selectedLaptop) => {
+const updateLaptopFeatures = (selectedLaptop) => {
     featuresListElement.innerHTML = "";
     selectedLaptop.specs.forEach(x => {
         const feature = document.createElement("li");
@@ -134,8 +144,33 @@ const addLaptopSpecs = (selectedLaptop) => {
     })
 }
 
+const updateLaptopDescription = (selectedLaptop) => {
+    laptopDescriptionElement.innerText = selectedLaptop.description;
+}
+
+const updateLaptopPrice = (selectedLaptop) => {
+    laptopPriceElement.innerText = selectedLaptop.price + ' Kr.';
+}
+
+const updateLaptopModel = (selectedLaptop) => {
+    laptopModelElement.innerText = selectedLaptop.title;
+}
+
+const handleBuyLaptopClick = () => {
+    const selectedLaptop = laptops[laptopSelectionElement.selectedIndex];
+    if(balance < selectedLaptop.price) {
+        alert("You can't afford the " + selectedLaptop.title + "!");
+        return;
+    }
+
+    balance -= selectedLaptop.price;
+    updateBalance();
+    alert("You are now the proud owner of a " + selectedLaptop.title + "!");
+}
+
 loanButtonElement.addEventListener("click", handleLoanButtonClick);
 workButtonElement.addEventListener("click", handleWorkButtonClick);
 bankButtonElement.addEventListener("click", handleBankButtonClick);
 repayLoanButtonElement.addEventListener("click", handleRepayLoanButtonClick);
 laptopSelectionElement.addEventListener("change", handleLaptopSelectionChange);
+buyLaptopButtonElement.addEventListener("click", handleBuyLaptopClick);
