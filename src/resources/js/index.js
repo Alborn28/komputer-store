@@ -13,10 +13,12 @@ const featuresListElement = document.getElementById("featuresList");
 const laptopDescriptionElement = document.getElementById("laptopDescription");
 const laptopPriceElement = document.getElementById("laptopPrice");
 const laptopModelElement = document.getElementById("laptopModel");
-const buyLaptopButtonElement = document.getElementById("buyLaptop");
+const buyLaptopButtonElement = document.getElementById("buyLaptopButton");
+const laptopImageElement = document.getElementById("laptopImage");
 
 let balance = 0;
 let outstandingLoan = 0;
+let loanTaken = false;
 
 let pay = 0;
 
@@ -33,6 +35,7 @@ const addLaptopsToList = (laptops) => {
     updateLaptopDescription(laptops[0]);
     updateLaptopPrice(laptops[0]);
     updateLaptopModel(laptops[0]);
+    updateLaptopImage(laptops[0]);
 }
 
 const addLaptopToList = (laptop) => {
@@ -48,6 +51,11 @@ const handleLoanButtonClick = () => {
         return;
     }
 
+    if(loanTaken) {
+        alert("You may only take one loan before buying a computer!");
+        return;
+    }
+
     const loanAmount = parseInt(prompt("How much do you wish to loan?"));
     if(loanAmount > (2 * balance)) {
         alert("You may not loan that much!");
@@ -56,6 +64,7 @@ const handleLoanButtonClick = () => {
 
     outstandingLoan = loanAmount;
     balance += loanAmount;
+    loanTaken = true;
 
     updateBalance();
 
@@ -66,7 +75,7 @@ const updateLoanBalance = () => {
     if(outstandingLoan > 0) {
         outstandingLoanElement.hidden = false;
         repayLoanButtonElement.hidden = false;
-        outstandingLoanAmountElement.innerText = outstandingLoan + ' Kr.';
+        outstandingLoanAmountElement.innerText = `${outstandingLoan}  Kr.`;
     }
 
     else {
@@ -127,12 +136,16 @@ const handleRepayLoanButtonClick = () => {
     updateLoanBalance();
 }
 
+
+
+
 const handleLaptopSelectionChange = (e) => {
     const selectedLaptop = laptops[e.target.selectedIndex];
     updateLaptopFeatures(selectedLaptop);
     updateLaptopDescription(selectedLaptop);
     updateLaptopPrice(selectedLaptop);
     updateLaptopModel(selectedLaptop);
+    updateLaptopImage(selectedLaptop)
 }
 
 const updateLaptopFeatures = (selectedLaptop) => {
@@ -156,6 +169,10 @@ const updateLaptopModel = (selectedLaptop) => {
     laptopModelElement.innerText = selectedLaptop.title;
 }
 
+const updateLaptopImage = (selectedLaptop) => {
+    laptopImageElement.src = `https://noroff-komputer-store-api.herokuapp.com/${selectedLaptop.image}`
+}
+
 const handleBuyLaptopClick = () => {
     const selectedLaptop = laptops[laptopSelectionElement.selectedIndex];
     if(balance < selectedLaptop.price) {
@@ -166,6 +183,7 @@ const handleBuyLaptopClick = () => {
     balance -= selectedLaptop.price;
     updateBalance();
     alert("You are now the proud owner of a " + selectedLaptop.title + "!");
+    loanTaken = false;
 }
 
 loanButtonElement.addEventListener("click", handleLoanButtonClick);

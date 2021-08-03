@@ -1,28 +1,138 @@
 body {
     border: solid 1px black;
-    width: 70%;
+    width: 60%;
+    min-width: 500px;
     margin: auto;
     padding: 2%;
     border-radius: 2%;
-    min-height: 500px;
+}
+
+.container {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .componentDiv {
     position: relative;
-    float: left;
-    padding: 5px;
     text-align: center;
-    border: solid 1px grey;
-    background-color: #e9e9e9;
-    width: 20%;
-    min-height: 150px;
+    border: solid 1px rgb(197, 197, 197);
+    width: 30%;
+    border-radius: 5%;
+}
+
+.leftSide {
+    float: left;
+    margin-left: 10%;
+}
+
+.rightSide {
+    float: right;
+    margin-right: 10%;
+}
+
+.bottom {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+}
+
+.button {
+    margin-bottom: 5px;
     border-radius: 10%;
 }
 
-#laptopDiv {
-    font-size: small;
+#loanButton {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px rgb(71, 182, 6) solid;
+    background-color: rgb(15, 230, 158);
 }
 
-#laptopDiv ul {
+#bankButton {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px rgb(226, 230, 15) solid;
+    background-color: rgb(209, 230, 15);
+}
+
+#workButton {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    border: 1px rgb(15, 83, 230) solid;
+    background-color: rgb(15, 83, 230);
+}
+
+#repayLoanButton {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    border: 1px rgb(172, 7, 35) solid;
+    background-color: rgb(230, 15, 51);
+}
+
+#buyLaptopButton {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px rgb(10, 154, 211) solid;
+    background-color: rgb(15, 187, 230);
+    margin-top: 5%;
+}
+
+#featuresHeader {
+    margin-bottom: 0px;
+}
+
+#laptopSelection {
+    width: 90%;
+}
+
+#featuresList {
+    margin-top: 0%;
+    font-size: small;
     text-align: left;
+}
+
+#laptopInfoDiv {
+    width: 100%;
+    min-height: 175px;
+    display: table;
+    justify-content: space-evenly;
+}
+
+.laptopInfoLeft {
+    display: table-cell;
+    vertical-align: middle;
+    width: 25%;
+}
+
+.laptopInfoCenter {
+    display: table-cell;
+    vertical-align:text-top;
+    width: 40%;
+}
+
+.laptopInfoRight {
+    display: table-cell;
+    vertical-align: middle;
+    width: 25%;
+}
+
+#laptopImage {
+    width: 50%;
 }

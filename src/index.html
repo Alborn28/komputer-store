@@ -8,71 +8,79 @@
     </head>
 
     <body>
-        <div class="componentDiv">
-            <h4>Joe Banker</h4>
-            <div>
-                <span>Balance: </span>
-                <span id="balance">0 Kr.</span>
+        <div class="container">
+            <div class="componentDiv">
+                <h3>Joe Banker</h3>
+                <div>
+                    <span class="leftSide">Balance</span>
+                    <span id="balance" class="rightSide">0 Kr.</span>
+                </div>
+                
+                <div>
+                    <span id="outstandingLoan" class="leftSide" hidden>Outstanding loan</span>
+                    <span id="outstandingLoanAmount" class="rightSide" ></span>
+                </div>
+                <div class="bottom">
+                    <button id="loanButton" class="button">Get a loan</button>
+                </div>
             </div>
-            
-            <div>
-                <span id="outstandingLoan" hidden>Outstanding loan: </span>
-                <span id="outstandingLoanAmount"></span>
+    
+            <div class="componentDiv">
+                <h4>Work</h4>
+                <div>
+                    <span class="leftSide" >Pay</span>
+                    <span id=pay class="rightSide" >0 Kr.</span>
+                </div>
+                
+                <div class="bottom">
+                    <div>
+                        <button id="bankButton" class="button">Bank</button>
+                        <button id="workButton" class="button">Work</button>
+                    </div>
+
+                    <div>
+                        <button id="repayLoanButton" class="button" hidden>Repay loan</button>
+                    </div>
+                </div>
             </div>
-            <div>
-                <button id="loanButton">Get a loan</button>
-            </div>
-        </div>
-
-        <div class="componentDiv">
-            <h4>Work</h4>
-            <div>
-                <span>Pay: </span>
-                <span id=pay>0 Kr.</span>
-            </div>
-            
-            <div>
-                <button id="bankButton">Bank</button>
-                <button id="workButton">Work</button>
-            </div>
-
-            <div>
-                <button id="repayLoanButton" hidden>Repay loan</button>
-            </div>
-        </div>
-
-        <div id="laptopDiv" class="componentDiv">
-            <h4>Laptops</h4>
-            <select id="laptopSelection">
-
-            </select>
-            <h5>Features</h5>
-            <ul id="featuresList">
-
-            </ul>
-        </div>
-
-        <div class="componentDiv">
-            <!--
-                Image
-            -->
-
-            <h4 id="laptopModel"></h4>
-
-            <div>
-                <span id="laptopDescription"></span>
-            </div>
-
-            <div>
-                <span>Price: </span>
-                <span id="laptopPrice"></span>
-            </div>
-
-            <div>
-                <button id="buyLaptop">BUY</button>
+    
+            <div id="laptopDiv" class="componentDiv">
+                <h4>Laptops</h4>
+                <select id="laptopSelection">
+    
+                </select>
+                <h5 id="featuresHeader">Features</h5>
+                <ul id="featuresList">
+    
+                </ul>
             </div>
         </div>
+        
+        <div class="container">
+            <div id="laptopInfoDiv" class="componentDiv">
+                <aside class="laptopInfoLeft">
+                    <img id="laptopImage" onerror="this.src='resources/images/image_missing.png'">
+                </aside>
+    
+                <div class="laptopInfoCenter">
+                    <h4 id="laptopModel"></h4>
+    
+                    <div>
+                        <span id="laptopDescription"></span>
+                    </div>
+                </div>
 
+                <aside class="laptopInfoRight">
+                    <div>
+                        <span>Price: </span>
+                        <span id="laptopPrice"></span>
+                    </div>
+                    <div>
+                        <button id="buyLaptopButton" class="button">BUY NOW</button>
+                    </div>
+                <aside>
+            </div>
+        </div>
         <script src="resources/js/index.js"></script>
     </body>
 </html>
