@@ -44,7 +44,7 @@ const addLaptopsToList = (laptops) => {
     updateLaptopPrice(laptops[0]);
     updateLaptopModel(laptops[0]);
     updateLaptopImage(laptops[0]);
-}
+};
 
 /**
  * Add a laptop to the dropdown-list.
@@ -55,13 +55,89 @@ const addLaptopToList = (laptop) => {
     laptopElement.value = laptop.id;
     laptopElement.appendChild(document.createTextNode(laptop.title));
     laptopSelectionElement.appendChild(laptopElement);
-}
+};
+
+/**
+ * Update the HTML elements concerning a user's loans. If no loan is active, it hides all elements connected to loans.
+ */
+const updateOutstandingLoan = () => {
+    if(outstandingLoan > 0) {
+        outstandingLoanElement.hidden = false;
+        repayLoanButtonElement.hidden = false;
+        outstandingLoanAmountElement.innerText = `${outstandingLoan}  Kr.`;
+    }
+
+    else {
+        outstandingLoanElement.hidden = true;
+        repayLoanButtonElement.hidden = true;
+        outstandingLoanAmountElement.innerText = "";
+    }
+};
+
+/**
+ * Updates the HTML element with the current account balance.
+ */
+const updateBalance = () => {
+    balanceElement.innerText = `${balance} Kr.`;
+};
+
+/**
+ * Update the HTML element with the current pay earned from work.
+ */
+const updatePay = () => {
+    payElement.innerText = `${pay} Kr.`;
+};
+
+/**
+ * Update the features to match the features of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
+const updateLaptopFeatures = (selectedLaptop) => {
+    featuresListElement.innerHTML = "";
+    selectedLaptop.specs.forEach(x => {
+        const feature = document.createElement("li");
+        feature.innerText = x;
+        featuresListElement.appendChild(feature);
+    });
+};
+
+/**
+ * Update the description to match the description of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
+const updateLaptopDescription = (selectedLaptop) => {
+    laptopDescriptionElement.innerText = selectedLaptop.description;
+};
+
+/**
+ * Update the price tag to match the price of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
+const updateLaptopPrice = (selectedLaptop) => {
+    laptopPriceElement.innerText = `${selectedLaptop.price} Kr.`;
+};
+
+/**
+ * Update the model to the model of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
+const updateLaptopModel = (selectedLaptop) => {
+    laptopModelElement.innerText = selectedLaptop.title;
+};
+
+/**
+ * Update the image to show the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
+const updateLaptopImage = (selectedLaptop) => {
+    laptopImageElement.src = `https://noroff-komputer-store-api.herokuapp.com/${selectedLaptop.image}`;
+};
 
 /**
  * Function called when the user wants to take a loan by clicking the loan button.
  * @returns when the user may not take a loan, for example when a loan is already active.
  */
-const handleLoanButtonClick = () => {
+ const handleLoanButtonClick = () => {
     if(outstandingLoan > 0) {
         alert("You may only have one loan at a time!");
         return;
@@ -89,49 +165,22 @@ const handleLoanButtonClick = () => {
 
     updateBalance();
     updateOutstandingLoan();
-}
-
-/**
- * Update the HTML element showing the amount the user has loaned. If no loan is active, it hides all elements connected to loans.
- */
-const updateOutstandingLoan = () => {
-    if(outstandingLoan > 0) {
-        outstandingLoanElement.hidden = false;
-        repayLoanButtonElement.hidden = false;
-        outstandingLoanAmountElement.innerText = `${outstandingLoan}  Kr.`;
-    }
-
-    else {
-        outstandingLoanElement.hidden = true;
-        repayLoanButtonElement.hidden = true;
-        outstandingLoanAmountElement.innerText = '';
-    }
-}
-
-/**
- * Updates the HTML element with the current account balance.
- */
-const updateBalance = () => {
-    balanceElement.innerText = `${balance} Kr.`;
-}
-
-
-
+};
 
 /**
  * Function called when a user clicks the work-button.
  */
-const handleWorkButtonClick = () => {
+ const handleWorkButtonClick = () => {
     pay += 100;
     updatePay();
-}
+};
 
 /**
  * Function called when a user clicks the bank-button. 
  * If the user has no loans, the full pay amount is transferred to the account balance. 
  * If a loan is active, 10% of the pay is deducted and subtracted from the outstanding loan. The rest is transferred to the account balance.
  */
-const handleBankButtonClick = () => {
+ const handleBankButtonClick = () => {
     if(outstandingLoan > 0) {
         if(pay/10 > outstandingLoan) {
             pay -= outstandingLoan;
@@ -150,21 +199,14 @@ const handleBankButtonClick = () => {
     pay = 0;
     updateBalance();
     updatePay();
-}
-
-/**
- * Update the HTML element with the current pay earned from work.
- */
-const updatePay = () => {
-    payElement.innerText = `${pay} Kr.`;
-}
+};
 
 /**
  * Function called when the user clicks the repay loan button. 
  * If the pay amount exceed the outstanding loan, subtract the loan amount from pay and leave the rest.
  * If the pay amount is less than the loan, subtract the full pay from the loan amount.
  */
-const handleRepayLoanButtonClick = () => {
+ const handleRepayLoanButtonClick = () => {
     if(pay > outstandingLoan) {
         pay -= outstandingLoan;
         outstandingLoan = 0;
@@ -177,68 +219,21 @@ const handleRepayLoanButtonClick = () => {
 
     updatePay();
     updateOutstandingLoan();
-}
-
-
+};
 
 /**
  * Function called when the selection in the dropdown-list is changed.
  * Updates the information shown on screen to match the current laptop selected in the dropdown-list.
  * @param {*} e the event that is triggered from the selection change.
  */
-const handleLaptopSelectionChange = (e) => {
+ const handleLaptopSelectionChange = (e) => {
     const selectedLaptop = laptops[e.target.selectedIndex];
     updateLaptopFeatures(selectedLaptop);
     updateLaptopDescription(selectedLaptop);
     updateLaptopPrice(selectedLaptop);
     updateLaptopModel(selectedLaptop);
-    updateLaptopImage(selectedLaptop)
-}
-
-/**
- * Update the features to match the features of the laptop currently selected in the dropdown-list.
- * @param {*} selectedLaptop currently selected laptop.
- */
-const updateLaptopFeatures = (selectedLaptop) => {
-    featuresListElement.innerHTML = "";
-    selectedLaptop.specs.forEach(x => {
-        const feature = document.createElement("li");
-        feature.innerText = x;
-        featuresListElement.appendChild(feature);
-    })
-}
-
-/**
- * Update the description to match the description of the laptop currently selected in the dropdown-list.
- * @param {*} selectedLaptop currently selected laptop.
- */
-const updateLaptopDescription = (selectedLaptop) => {
-    laptopDescriptionElement.innerText = selectedLaptop.description;
-}
-
-/**
- * Update the price tag to match the price of the laptop currently selected in the dropdown-list.
- * @param {*} selectedLaptop currently selected laptop.
- */
-const updateLaptopPrice = (selectedLaptop) => {
-    laptopPriceElement.innerText = `${selectedLaptop.price} Kr.`;
-}
-
-/**
- * Update the model to the model of the laptop currently selected in the dropdown-list.
- * @param {*} selectedLaptop currently selected laptop.
- */
-const updateLaptopModel = (selectedLaptop) => {
-    laptopModelElement.innerText = selectedLaptop.title;
-}
-
-/**
- * Update the image to show the laptop currently selected in the dropdown-list.
- * @param {*} selectedLaptop currently selected laptop.
- */
-const updateLaptopImage = (selectedLaptop) => {
-    laptopImageElement.src = `https://noroff-komputer-store-api.herokuapp.com/${selectedLaptop.image}`
-}
+    updateLaptopImage(selectedLaptop);
+};
 
 /**
  * Function called when the user clicks the BUY NOW-button to buy a laptop.
@@ -255,7 +250,7 @@ const handleBuyLaptopClick = () => {
     updateBalance();
     alert(`You are now the proud owner of a ${selectedLaptop.title}!`);
     loanTaken = false;
-}
+};
 
 /**
  * Eventlisteners to handle events such as button clicks and selection changes.

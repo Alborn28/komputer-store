@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://gitlab.com/albin.ljungdahl/experis-assignment-4/issues"
   },
-  "homepage": "https://gitlab.com/albin.ljungdahl/experis-assignment-4#readme"
+  "homepage": "https://gitlab.com/albin.ljungdahl/experis-assignment-4#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
 }
