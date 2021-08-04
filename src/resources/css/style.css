@@ -3,7 +3,7 @@ body {
     width: 60%;
     min-width: 500px;
     margin: auto;
-    transform: translateY(30%)
+    margin-top: 5%;
 }
 
 .banner {
