@@ -73,6 +73,10 @@ const handleLoanButtonClick = () => {
     }
 
     const loanAmount = parseInt(prompt("How much do you wish to loan?"));
+    if(isNaN(loanAmount)) {
+        alert("Input must be an integer!");
+        return;
+    }
 
     if(loanAmount > (2 * balance)) {
         alert("You may not loan that much!");
@@ -148,10 +152,18 @@ const handleBankButtonClick = () => {
     updatePay();
 }
 
+/**
+ * Update the HTML element with the current pay earned from work.
+ */
 const updatePay = () => {
     payElement.innerText = `${pay} Kr.`;
 }
 
+/**
+ * Function called when the user clicks the repay loan button. 
+ * If the pay amount exceed the outstanding loan, subtract the loan amount from pay and leave the rest.
+ * If the pay amount is less than the loan, subtract the full pay from the loan amount.
+ */
 const handleRepayLoanButtonClick = () => {
     if(pay > outstandingLoan) {
         pay -= outstandingLoan;
@@ -169,7 +181,11 @@ const handleRepayLoanButtonClick = () => {
 
 
 
-
+/**
+ * Function called when the selection in the dropdown-list is changed.
+ * Updates the information shown on screen to match the current laptop selected in the dropdown-list.
+ * @param {*} e the event that is triggered from the selection change.
+ */
 const handleLaptopSelectionChange = (e) => {
     const selectedLaptop = laptops[e.target.selectedIndex];
     updateLaptopFeatures(selectedLaptop);
@@ -179,6 +195,10 @@ const handleLaptopSelectionChange = (e) => {
     updateLaptopImage(selectedLaptop)
 }
 
+/**
+ * Update the features to match the features of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
 const updateLaptopFeatures = (selectedLaptop) => {
     featuresListElement.innerHTML = "";
     selectedLaptop.specs.forEach(x => {
@@ -188,22 +208,42 @@ const updateLaptopFeatures = (selectedLaptop) => {
     })
 }
 
+/**
+ * Update the description to match the description of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
 const updateLaptopDescription = (selectedLaptop) => {
     laptopDescriptionElement.innerText = selectedLaptop.description;
 }
 
+/**
+ * Update the price tag to match the price of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
 const updateLaptopPrice = (selectedLaptop) => {
     laptopPriceElement.innerText = `${selectedLaptop.price} Kr.`;
 }
 
+/**
+ * Update the model to the model of the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
 const updateLaptopModel = (selectedLaptop) => {
     laptopModelElement.innerText = selectedLaptop.title;
 }
 
+/**
+ * Update the image to show the laptop currently selected in the dropdown-list.
+ * @param {*} selectedLaptop currently selected laptop.
+ */
 const updateLaptopImage = (selectedLaptop) => {
     laptopImageElement.src = `https://noroff-komputer-store-api.herokuapp.com/${selectedLaptop.image}`
 }
 
+/**
+ * Function called when the user clicks the BUY NOW-button to buy a laptop.
+ * @returns if the user can't afford the selected laptop.
+ */
 const handleBuyLaptopClick = () => {
     const selectedLaptop = laptops[laptopSelectionElement.selectedIndex];
     if(balance < selectedLaptop.price) {
@@ -217,6 +257,9 @@ const handleBuyLaptopClick = () => {
     loanTaken = false;
 }
 
+/**
+ * Eventlisteners to handle events such as button clicks and selection changes.
+ */
 loanButtonElement.addEventListener("click", handleLoanButtonClick);
 workButtonElement.addEventListener("click", handleWorkButtonClick);
 bankButtonElement.addEventListener("click", handleBankButtonClick);
