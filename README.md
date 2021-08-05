@@ -6,4 +6,4 @@ The task was to build a dynamic webpage using vanilla JavaScript. The webpage sh
 
 ## Webpage
 
-Link to webpage: [link](https://alborn28.github.io/assignment-4/)
+Link to webpage: [link](https://alborn28.github.io/komputer-store/)
