@@ -27,10 +27,16 @@ let pay = 0;
  * It stores the laptops in the laptops-array and loads them into the dropdown-list on the page.
  */
 (async () => {
-    const response = await fetch("https://noroff-komputer-store-api.herokuapp.com/computers");
-    const data = await response.json();
-    laptops = data;
-    addLaptopsToList(laptops);
+    try {
+        const response = await fetch("https://noroff-komputer-store-api.herokuapp.com/computers");
+        const data = await response.json();
+        laptops = data;
+        addLaptopsToList(laptops);
+    }
+    catch(error) {
+        console.error("Something went wrong with fetching from API...");
+        console.error(error);
+    }
 })();
 
 /**
